@@ -1,19 +1,14 @@
-file = open("input.txt", "r")
-data = file.read()[:-1].split("\n")
+data = open("input.txt").read().split("\n")[:-1]
 
-pos = 0
-depth = 0
-aim = 0
+pos = depth = aim = 0
 
-for i in range(len(data)):
-	data[i] = data[i].split(" ")
-	data[i][1] = int(data[i][1])
-	if data[i][0] == "down":
-		aim += data[i][1]
-	if data[i][0] == "up":
-		aim -= data[i][1]
-	if data[i][0] == "forward":
-		pos += data[i][1]
-		depth += aim * data[i][1]
+for i in data:
+	i = i.split(" ")
+	i[1] = int(i[1])
+	if i[0] == "forward":
+		pos += i[1]
+		depth += aim * i[1]
+	else:
+		aim += i[1] if i[0] == "down" else -i[1]
 
-print(str(pos*depth))
+print(pos*depth)

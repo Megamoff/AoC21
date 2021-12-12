@@ -1,10 +1,8 @@
 data = open("input.txt").read().split("\n")[:-1]
 
 map = []
-for i in range(len(data)):
-	map.append([])
-	for j in data[i]:
-		map[i].append(int(j))
+for i in data:
+	map.append([int(j) for j in i])
 
 def deep_search(i, j):
 	if map[i][j] == 9:
@@ -12,29 +10,18 @@ def deep_search(i, j):
 	map[i][j] = 9
 	n = 1
 	if i > 0:
-		try:
-			n += deep_search(i-1, j)
-		except IndexError:
-			pass
+		n += deep_search(i-1, j)
 	if j > 0:
-		try:
-			n += deep_search(i, j -1)
-		except IndexError:
-			pass
-	try:
+		n += deep_search(i, j -1)
+	if i < len(map)-1:
 		n += deep_search(i+1, j)
-	except IndexError:
-		pass
-	try:
+	if j < len(map[i])-1:
 		n += deep_search(i, j+1)
-	except IndexError:
-		pass
 	return n
 
 basins = []
 for i in range(len(map)):
 	for j in range(len(map[i])):
-		if map[i][j] == 9:
-			continue
-		basins.append(deep_search(i,j))
-print(sorted(basins))
+		if map[i][j] != 9:
+			basins.append(deep_search(i,j))
+print(sorted(basins)[-3:])

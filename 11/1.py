@@ -1,8 +1,6 @@
 data = open("input.txt").read().split("\n")[:-1]
 
-map = []
-for i in data:
-	map.append([int(j) for j in i])
+map = [[int(j) for j in i] for i in data]
 
 n = 0
 for i in range(100):

@@ -1,15 +1,9 @@
 data = open("input.txt").read().split("\n")[:-1]
 
 rate = ""
-
 for i in range(len(data[0])):
-	c = 0
-	for k in range(len(data)):
-		if data[k][i] == "1":
-			c += 1
-	if c > len(data)/2:
-		rate = rate + "1"
-	else:
-		rate = rate + "0"
+	c = sum([j[i] == "1" for j in data])
+	rate = rate + ("1" if c > len(data)/2 else "0")
+inv_rate = "".join("1" if i == "0" else "0" for i in rate)
 
-print(rate)
+print(int(rate, 2) * int(inv_rate,2))

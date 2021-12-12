@@ -7,20 +7,18 @@ for i in data:
 	for j in i:
 		if j == "(" or j == "[" or j == "{" or j == "<":
 			stack.append(j)
-		if j == ")" or j == "]" or j == "}" or j == ">":
-			c = stack.pop()
-			if j == ")" and not c == "(":
-				b = True
-				break
-			if j == "]" and not c == "[":
-				b = True
-				break
-			if j == "}" and not c == "{":
-				b = True
-				break
-			if j == ">" and not c == "<":
-				b = True
-				break
+		if j == ")" and not stack.pop() == "(":
+			b = True
+			break
+		if j == "]" and not stack.pop() == "[":
+			b = True
+			break
+		if j == "}" and not stack.pop() == "{":
+			b = True
+			break
+		if j == ">" and not stack.pop() == "<":
+			b = True
+			break
 	if b:
 		continue
 	s = 0
